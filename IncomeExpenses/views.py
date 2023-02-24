@@ -16,7 +16,11 @@ def expensesData(request):
 
 
 def addExpense(request):
-    print(request.POST)
+    if request.method == "POST":
+        category = request.POST.get("category", "")
+        type = request.POST.get("type", "")
+        amount = request.POST.get("amount", "")
+        IncomeExpenses.objects.create(category=category, type=type, amount=amount)
     return render(request, template_name="add.html")
 
 def login_request(request):
